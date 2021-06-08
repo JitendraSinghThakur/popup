@@ -77,24 +77,48 @@ class _AddTodoPopupCard extends StatelessWidget {
                 RoundedRectangleBorder(borderRadius: BorderRadius.circular(32)),
             child: SingleChildScrollView(
               child: Padding(
-                padding: const EdgeInsets.all(16.0),
+                padding: const EdgeInsets.all(15.0),
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    // MyListView(),
-                    const TextField(
-                      decoration: InputDecoration(
-                        hintText: 'New todo',
-                        border: InputBorder.none,
+                    Padding(
+                      padding: const EdgeInsets.only(left: 10, top: 15),
+                      child: Row(
+                        children: [
+                          Text("Salesman/Customer Rep"),
+                          SizedBox(
+                            width: 70,
+                          ),
+                          InkWell(
+                            child: Icon(Icons.cancel),
+                            onTap: () => {print("Close")},
+                          ),
+                        ],
                       ),
-                      cursorColor: Colors.white,
                     ),
-                    const Divider(
-                      color: Colors.white,
-                      thickness: 0.2,
-                    ),
+                    // TextFormField(
+                    //   decoration: InputDecoration(
+                    //     labelText: "Search here",
+                    //     // border: InputBorder.none,
+                    //     fillColor: Colors.red,
+
+                    //     border: OutlineInputBorder(
+                    //         borderSide:
+                    //             BorderSide(color: Colors.red, width: 32.0),
+                    //         borderRadius: BorderRadius.circular(25.0)),
+                    //     // icon: new Icon(Icons.search),
+
+                    //     prefixIcon: Icon(Icons.search),
+                    //   ),
+                    // ),
+
                     Container(
-                      child: MyListView(),
+                      // width: MediaQuery.of(context).size.width * 0.90,
+                      height: MediaQuery.of(context).size.height * 0.70,
+                      child: Padding(
+                        padding: const EdgeInsets.all(0.0),
+                        child: ListSearch(),
+                      ),
                     ),
                     // const TextField(
                     //   decoration: InputDecoration(

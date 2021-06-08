@@ -55,10 +55,49 @@ class Home extends StatelessWidget {
             ),
           ),
           SafeArea(
-            child: _TodoListContent(
-              todos: fakeData,
+            child: Padding(
+              padding: const EdgeInsets.only(top: 30),
+              child: InkWell(
+                // onTap: () => _popupDialog(context),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisSize: MainAxisSize.min,
+                  children: <Widget>[
+                    Container(
+                      width: MediaQuery.of(context).size.width * 1,
+                      //  height: MediaQuery.of(context).size.height * 1,
+                      padding: EdgeInsets.all(8.0),
+                      decoration: BoxDecoration(
+                        border: Border(
+                          top: BorderSide(width: 1.2),
+                        ),
+                      ),
+                      child: Text(
+                        "Salesman/ Customer Rep",
+                        style: TextStyle(letterSpacing: 0.5),
+                      ),
+                    ),
+                    Container(
+                      width: MediaQuery.of(context).size.width * 1,
+                      padding: EdgeInsets.all(8.0),
+                      decoration: BoxDecoration(
+                        border: Border(
+                          bottom: BorderSide(
+                              width: 1.2, color: Colors.lightBlue.shade900),
+                        ),
+                      ),
+                      child: Text('None'),
+                    ),
+                  ],
+                ),
+              ),
             ),
           ),
+          // SafeArea(
+          //   child: _TodoListContent(
+          //     todos: fakeData,
+          //   ),
+          // ),
           const Align(
             alignment: Alignment.bottomRight,
             child: AddTodoButton(),
