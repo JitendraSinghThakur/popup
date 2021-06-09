@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
 
 /// Convenience class to access application colors.
@@ -11,6 +12,7 @@ abstract class AppColors {
   /// Color used for cards and surfaces.
   static const Color cardColor = Color(0xFF1F2426);
 
-  /// Accent color used in the application.
-  static const Color accentColor = Color(0xFFef8354);
+  /// Accent color used in the application.Color(0xFFef8354);
+  static const Color accentColor = Colors.blue;
+  static const Color whiteColor = Colors.white10;
 }
