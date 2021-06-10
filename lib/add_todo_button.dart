@@ -3,11 +3,6 @@ import 'package:popup/listdart.dart';
 import 'package:popup/styles.dart';
 import 'hero_dialog_route.dart';
 
-// Opens a [HeroDialogRoute] of [_AddTodoPopupCard].
-///
-// Uses a [Hero] with tag [_heroAddTodo].
-// {@endtemplate}
-
 class OpenCustomerDetails extends StatefulWidget {
   const OpenCustomerDetails({Key? key}) : super(key: key);
 
@@ -16,6 +11,17 @@ class OpenCustomerDetails extends StatefulWidget {
 }
 
 class _OpenCustomerDetailsState extends State<OpenCustomerDetails> {
+  // String data3 = 'no';
+  String datatoParent3 = 'Greetings from the coming father';
+
+  void onDataChange3(val3) {
+    print(val3);
+    setState(() {
+      textvalue = val3;
+    });
+  }
+
+  String textvalue = "None";
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -23,7 +29,9 @@ class _OpenCustomerDetailsState extends State<OpenCustomerDetails> {
       child: GestureDetector(
         onTap: () {
           Navigator.of(context).push(HeroDialogRoute(builder: (context) {
-            return const _OpenBox();
+            return _OpenBox(
+                datatoParent2: datatoParent3,
+                callback2: (val3) => onDataChange3(val3));
           }));
         },
         child: Hero(
@@ -34,7 +42,7 @@ class _OpenCustomerDetailsState extends State<OpenCustomerDetails> {
           child: GestureDetector(
             child: Padding(
               padding: const EdgeInsets.only(top: 30),
-              child: InkWell(
+              child: Material(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisSize: MainAxisSize.min,
@@ -62,7 +70,7 @@ class _OpenCustomerDetailsState extends State<OpenCustomerDetails> {
                               width: 1.2, color: Colors.lightBlue.shade900),
                         ),
                       ),
-                      child: Text('None'),
+                      child: Text(textvalue),
                     ),
                   ],
                 ),
@@ -75,24 +83,33 @@ class _OpenCustomerDetailsState extends State<OpenCustomerDetails> {
   }
 }
 
-/// Tag-value used for the add todo popup button.
 const String _heroAddTodo = 'add-todo-hero';
 
-/// {@template add_todo_popup_card}
-/// Popup card to add a new [Todo]. Should be used in conjuction with
-/// [HeroDialogRoute] to achieve the popup effect.
-///
-/// Uses a [Hero] with tag [_heroAddTodo].
-/// {@endtemplate}
-
 class _OpenBox extends StatefulWidget {
-  const _OpenBox({Key? key}) : super(key: key);
+  _OpenBox({Key? key, required this.datatoParent2, this.callback2})
+      : super(key: key);
+  final callback2;
+  String datatoParent2;
 
   @override
   __OpenBoxState createState() => __OpenBoxState();
 }
 
 class __OpenBoxState extends State<_OpenBox> {
+  String data = 'no';
+  String datatoParent = 'Greetings from the coming father';
+  void listData2(val2) {
+    widget.callback2(val2);
+  }
+
+  void onDataChange(val) {
+    print(val);
+    listData2(val);
+    setState(() {
+      data = val;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Center(
@@ -116,7 +133,9 @@ class __OpenBoxState extends State<_OpenBox> {
                       height: MediaQuery.of(context).size.height * 0.70,
                       child: Padding(
                         padding: const EdgeInsets.all(0.0),
-                        child: ListSearch(),
+                        child: ListSearch(
+                            datatoParent: datatoParent,
+                            callback: (val) => onDataChange(val)),
                       ),
                     ),
                   ],

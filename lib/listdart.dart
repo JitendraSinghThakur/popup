@@ -2,6 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:popup/styles.dart';
 
 class ListSearch extends StatefulWidget {
+  ListSearch({Key? key, required this.datatoParent, this.callback})
+      : super(key: key);
+  final callback;
+  String datatoParent;
   ListSearchState createState() => ListSearchState();
 }
 
@@ -9,25 +13,36 @@ class ManageName {
   int id;
   String fname;
   String lname;
+  bool checked;
 
-  ManageName(this.id, this.fname, this.lname);
+  ManageName(this.id, this.fname, this.lname, this.checked);
 }
 
 class ListSearchState extends State<ListSearch> {
+  void listData(id, fname, lname) {
+    widget.callback(fname);
+    for (var i = 0; i < newDataList.length; i++) {
+      newDataList[i].checked = false;
+      if (newDataList[i].id == id) {
+        newDataList[i].checked = true;
+      }
+    }
+  }
+
   TextEditingController _textController = TextEditingController();
 
   static List<ManageName> mainDataList = [
-    new ManageName(1, "Ram", "Singh"),
-    new ManageName(2, "Rohit", "Singh"),
-    new ManageName(3, "Amit ", "Singh"),
-    new ManageName(4, "Mohit ", "Rahu"),
-    new ManageName(5, "Neha ", "Sharma"),
-    new ManageName(6, "Mohit ", "Sahu"),
-    new ManageName(7, "Priya ", "Sharma"),
-    new ManageName(8, "Akhilesh ", "Arora"),
-    new ManageName(9, "Aditaya ", "Sahu"),
-    new ManageName(10, "Narendra ", "Pal"),
-    new ManageName(11, "Amrita ", "Singh"),
+    new ManageName(1, "Ram", "Singh", false),
+    new ManageName(2, "Rohit", "Singh", false),
+    new ManageName(3, "Amit ", "Singh", false),
+    new ManageName(4, "Mohit ", "Rahu", false),
+    new ManageName(5, "Neha ", "Sharma", false),
+    new ManageName(6, "Mohit ", "Sahu", false),
+    new ManageName(7, "Priya ", "Sharma", false),
+    new ManageName(8, "Akhilesh ", "Arora", false),
+    new ManageName(9, "Aditaya ", "Sahu", false),
+    new ManageName(10, "Narendra ", "Pal", false),
+    new ManageName(11, "Amrita ", "Singh", false),
   ];
 
   // Copy Main List into New List.
@@ -81,7 +96,10 @@ class ListSearchState extends State<ListSearch> {
                     backgroundImage: AssetImage('img/images/jitendra.jpeg'),
                   ),
                   title: Text(data.fname + " " + data.lname),
-                  onTap: () => print(data.fname),
+                  trailing: data.checked ? Icon(Icons.check) : null,
+                  onTap: () {
+                    listData(data.id, data.fname, data.lname);
+                  },
                 );
               }).toList(),
             ),
